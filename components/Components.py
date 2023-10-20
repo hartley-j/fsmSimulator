@@ -60,7 +60,7 @@ class FlipFlop:
 class DFlipFlop(FlipFlop):
 
     def __init__(self, _d):
-        FlipFlop.__init__(self, _s=_d, _r=not _d)
+        FlipFlop.__init__(self, _s=not _d, _r=_d)
 
     def set_inputs(self, *args, **kwargs):
         super(DFlipFlop, self).set_inputs(_s=not kwargs["_d"], _r=kwargs["_d"])
