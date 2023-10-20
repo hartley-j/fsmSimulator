@@ -1,6 +1,35 @@
 import itertools
 from random import randint
 
+
+class Not:
+
+    def __init__(self, _input):
+        self.input = bool(_input)
+        self.output = not self.input
+
+    def get_output(self):
+        return self.output
+
+    def update(self, _input):
+        self.input = bool(_input)
+        self.output = not self.input
+
+
+class NAND:
+
+    def __init__(self, *args):
+        self.inputs = [bool(args[x]) for x in range(len(args) - 1)]
+        self.output = not (all(self.inputs))
+
+    def get_output(self):
+        return self.output
+
+    def update(self, *args):
+        self.inputs = [bool(args[x]) for x in range(len(args) - 1)]
+        self.output = not (all(self.inputs))
+
+
 class FlipFlop:
     id_iter = itertools.count()
 

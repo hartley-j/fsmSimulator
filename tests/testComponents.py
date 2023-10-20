@@ -1,5 +1,5 @@
 import unittest
-from components.FlipFlop import *
+from components.Components import *
 
 
 class TestFlipFlops(unittest.TestCase):
