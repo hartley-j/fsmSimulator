@@ -29,3 +29,5 @@ class Circuit:
         for e in range(len(args)-1):
             self.adj_matrix[c1][args[e]] = 0
 
+    def adjacent(self, c1, c2):
+        return bool(self.adj_matrix[c1][c2])
