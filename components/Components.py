@@ -2,43 +2,53 @@ import itertools
 from random import randint
 
 
-class Not:
+class Component:
+    id_iter = itertools.count()
+
+    def __init__(self):
+        self.inputs = None
+        self.output = None
+        self.id = next(self.id_iter)
+
+
+class Not(Component):
 
     def __init__(self, _input):
-        self.input = bool(_input)
-        self.output = not self.input
+        super().__init__()
+        self.inputs = _input
+        self.output = not self.inputs
 
     def get_output(self):
         return self.output
 
     def update(self, _input):
-        self.input = bool(_input)
-        self.output = not self.input
+        self.inputs = bool(_input)
+        self.output = not self.inputs
 
 
-class NAND:
+class NAND(Component):
 
     def __init__(self, *args):
-        self.inputs = [bool(args[x]) for x in range(len(args) - 1)]
+        super().__init__()
+        self.inputs = [args[x] for x in range(len(args) - 1)]
         self.output = not (all(self.inputs))
 
     def get_output(self):
         return self.output
 
     def update(self, *args):
-        self.inputs = [bool(args[x]) for x in range(len(args) - 1)]
+        self.inputs = [args[x] for x in range(len(args) - 1)]
         self.output = not (all(self.inputs))
 
 
-class FlipFlop:
-    id_iter = itertools.count()
+class FlipFlop(Component):
 
     def __init__(self, _s, _r):
+        super().__init__()
         self.inputs = {"Set": bool(_s), "Reset": bool(_r)}
         # Determined best initial output should be None value
         # Probably not the best implementation, but will work for now
         self.output = bool(randint(0, 1))
-        self.id = next(self.id_iter)
 
     def get_output(self):
         return self.output
